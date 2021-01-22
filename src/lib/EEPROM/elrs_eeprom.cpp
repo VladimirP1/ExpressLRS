@@ -3,8 +3,8 @@
 
 #if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX)
     extEEPROM EEPROM(kbits_2, 1, 1, 0x51);
-#elif defined(TARGET_R9M_RX)
-    extEEPROM EEPROM(kbits_2, 1, 1, 0x50);
+#elif defined(TARGET_R9M_RX) || defined(TARGET_R900MINI_TX)
+    //extEEPROM EEPROM(kbits_2, 1, 1, 0x50);
 #elif defined(PLATFORM_ESP32) || defined(PLATFORM_ESP8266)
 #else
 #define NO_EEPROM 1

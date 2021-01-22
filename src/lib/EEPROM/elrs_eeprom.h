@@ -4,7 +4,11 @@
 #include "../../src/targets.h"
 #include <Wire.h>
 #ifdef PLATFORM_STM32
+    #ifndef TARGET_R900MINI_TX
     #include <extEEPROM.h>
+    #else
+    #include <EEPROM.h>
+    #endif
 #else
     #include <EEPROM.h>
 #endif

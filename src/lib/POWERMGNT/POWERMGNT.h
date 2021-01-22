@@ -25,12 +25,16 @@
 #endif
 
 #ifdef TARGET_100mW_MODULE
+#ifdef TARGET_R900MINI_TX
+#define MaxPower 3
+#else
 #define MaxPower 2
+#endif
 #define DefaultPowerEnum 2
 #endif
 
 #ifdef TARGET_1000mW_MODULE
-#define MaxPower 4
+#define MaxPower 6
 #define DefaultPowerEnum 2
 #endif
 

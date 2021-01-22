@@ -9,15 +9,14 @@
  
 
 ### BINDING PHRASE: ### 
-# Uncomment the line below to use a hardcoded binding phrase
-# Leave commented to use traditional binding
-#-DMY_BINDING_PHRASE="default ExpressLRS binding phrase"
+
+#-DMY_BINDING_PHRASE="My bind phraseQ"
 
 
 ### REGULATORY DOMAIN: ### 
 
 #-DRegulatory_Domain_AU_915
-#-DRegulatory_Domain_EU_868
+-DRegulatory_Domain_EU_868
 #-DRegulatory_Domain_AU_433
 #-DRegulatory_Domain_EU_433
 #-DRegulatory_Domain_FCC_915
@@ -26,7 +25,7 @@
 
 ### SWITCHES: ### 
 
-#-DHYBRID_SWITCHES_8
+-DHYBRID_SWITCHES_8
 
 
 ### PERFORMANCE OPTIONS: ### 
@@ -38,12 +37,12 @@
 #-DR9M_UNLOCK_HIGHER_POWER
 
 #-DNO_SYNC_ON_ARM
-#-DARM_CHANNEL=AUX1
+-DARM_CHANNEL=AUX1
 
--DFEATURE_OPENTX_SYNC
+#-DFEATURE_OPENTX_SYNC
 #-DFEATURE_OPENTX_SYNC_AUTOTUNE
 
-#-DLOCK_ON_FIRST_CONNECTION
+-DLOCK_ON_FIRST_CONNECTION
 #-DLOCK_ON_50HZ
 
 

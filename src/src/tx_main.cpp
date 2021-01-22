@@ -546,24 +546,27 @@ void ICACHE_RAM_ATTR TXdoneISR()
 
 void setup()
 {
-#ifdef PLATFORM_ESP32
+#if defined(PLATFORM_ESP32) || defined(TARGET_R900MINI_TX)
   Serial.begin(115200);
 #endif
 
-#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1)
+#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1) || defined(TARGET_R900MINI_TX)
 
     pinMode(GPIO_PIN_LED_GREEN, OUTPUT);
     pinMode(GPIO_PIN_LED_RED, OUTPUT);
     digitalWrite(GPIO_PIN_LED_GREEN, HIGH);
 
+  delay(1000);
 #ifdef USE_ESP8266_BACKPACK
     HardwareSerial(USART1);
     Serial.begin(460800);
 #else
+#if !defined(TARGET_R900MINI_TX)
     HardwareSerial(USART2);
     Serial.setTx(PA2);
     Serial.setRx(PA3);
     Serial.begin(400000);
+#endif
 #endif
     
 
@@ -637,16 +640,17 @@ void setup()
   bool init_success = Radio.Begin();
   while (!init_success)
   {
-    #if defined(TARGET_R9M_TX)
+    //#if defined(TARGET_R9M_TX)
     digitalWrite(GPIO_PIN_LED_GREEN, LOW);
-    tone(GPIO_PIN_BUZZER, 480, 200);
+    //tone(GPIO_PIN_BUZZER, 480, 200);
     digitalWrite(GPIO_PIN_LED_RED, LOW);
     delay(200);
-    tone(GPIO_PIN_BUZZER, 400, 200);
+    //tone(GPIO_PIN_BUZZER, 400, 200);
     digitalWrite(GPIO_PIN_LED_RED, HIGH);
     delay(1000);
-    #endif
+    //#endif
   }
+
   POWERMGNT.setDefaultPower();
 
   eeprom.Begin(); // Init the eeprom
@@ -660,10 +664,13 @@ void setup()
   POWERMGNT.setPower((PowerLevels_e)config.GetPower());
 
   crsf.Begin();
+      digitalWrite(GPIO_PIN_LED_GREEN, LOW);
+delay(1000);
   hwTimer.init();
   hwTimer.resume();
   hwTimer.stop(); //comment to automatically start the RX timer and leave it running
   LQCALC.init(10);
+
 }
 
 void loop()
@@ -698,23 +705,23 @@ void loop()
 #ifdef FEATURE_OPENTX_SYNC
 // Serial.println(crsf.OpenTXsyncOffset);
 #endif
-
+  digitalWrite(GPIO_PIN_LED_GREEN, CRSF::CRSFstate);
   if (millis() > (RX_CONNECTION_LOST_TIMEOUT + LastTLMpacketRecvMillis))
   {
     connectionState = disconnected;
-    #if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1)
+    #if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1) || defined(TARGET_R900MINI_TX)
     digitalWrite(GPIO_PIN_LED_RED, LOW);
     #endif
   }
   else
   {
     connectionState = connected;
-    #if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1)
+    #if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1) || defined(TARGET_R900MINI_TX)
     digitalWrite(GPIO_PIN_LED_RED, HIGH);
     #endif
   }
 
-#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1)
+#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1) || defined(TARGET_R900MINI_TX)
   crsf.STM32handleUARTin();
   #ifdef FEATURE_OPENTX_SYNC
   crsf.sendSyncPacketToTX();

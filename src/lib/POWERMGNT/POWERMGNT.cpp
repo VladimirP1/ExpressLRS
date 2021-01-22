@@ -105,6 +105,10 @@ PowerLevels_e POWERMGNT::setPower(PowerLevels_e Power)
         Radio.SetOutputPower(0b1111); //15
         CurrentPower = PWR_50mW;
         break;
+    case PWR_100mW:
+        Radio.SetOutputPower(0b11111); //15
+        CurrentPower = PWR_100mW;
+        break;
     default:
         CurrentPower = PWR_50mW;
         Radio.SetOutputPower(0b1111); //15

@@ -360,7 +360,7 @@ static int8_t boot_code_xmodem(uint32_t rx_pin, uint32_t tx_pin)
 
 
 #ifndef BOOT_WAIT
-#define BOOT_WAIT 300 // ms
+#define BOOT_WAIT 1000 // ms
 #endif
 
 static uint32_t boot_start_time;
@@ -446,8 +446,8 @@ int main(void)
   tx_pin = IO_CREATE(UART_TX_PIN);
 
   /* Give a bit time for OTX to bootup */
-  if ((BL_FLASH_START & 0xffff) == 0x0)
-    HAL_Delay(500);
+  //if ((BL_FLASH_START & 0xffff) == 0x0)
+  //  HAL_Delay(500);
 
   ret = boot_code_stk(UART_BAUD, rx_pin, tx_pin, duplex_pin);
 #if defined(UART_TX_PIN_2ND)
