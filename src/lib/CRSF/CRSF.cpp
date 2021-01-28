@@ -15,7 +15,7 @@ TaskHandle_t xESP32uartWDT = NULL;
 SemaphoreHandle_t mutexOutFIFO = NULL;
 #endif
 
-#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1)
+#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1) || defined(TARGET_NAMIMNO_ALPHA_TX)
 HardwareSerial CRSF::Port(USART3);
 #if defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1)
 #include "stm32f3xx_hal.h"
@@ -104,7 +104,7 @@ void CRSF::Begin()
     xTaskCreatePinnedToCore(ESP32uartTask, "ESP32uartTask", 3000, NULL, 10, &xESP32uartTask, 1);
     xTaskCreatePinnedToCore(UARTwdt, "ESP32uartWDTTask", 2000, NULL, 10, &xESP32uartWDT, 1);
 #endif
-#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX)
+#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
     // TODO: Find out if xTaskCreate is a substitute for xTaskCreatePinnedToCore
     Serial.println("STM32 Platform Detected...");
     CRSF::STM32initUART();
@@ -175,7 +175,7 @@ void ICACHE_RAM_ATTR CRSF::setSentSwitch(uint8_t index, uint8_t value)
     sentSwitches[index] = value;
 }
 
-#if defined(PLATFORM_ESP32) || defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX)
+#if defined(PLATFORM_ESP32) || defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
 void ICACHE_RAM_ATTR CRSF::sendLinkStatisticsToTX()
 {
     uint8_t outBuffer[LinkStatisticsFrameLength + 4] = {0};
@@ -471,7 +471,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
         }
 #endif
 
-#if defined(PLATFORM_ESP32) || defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX)
+#if defined(PLATFORM_ESP32) || defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
 
 #ifdef PLATFORM_ESP32
     void ICACHE_RAM_ATTR CRSF::UARTwdt(void *pvParameters) // in values in us.
@@ -481,7 +481,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
         {
 #endif
 
-#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX)
+#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
             void  CRSF::UARTwdt()
             {
                 if (millis() > (UARTwdtLastChecked + UARTwdtInterval))
@@ -730,7 +730,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
             }
 #endif
 
-#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX)
+#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
 
             void ICACHE_RAM_ATTR CRSF::STM32initUART() //RTOS task to read and write CRSF packets to the serial port
             {

@@ -1,5 +1,5 @@
 
-#ifdef TARGET_R9M_TX
+#if defined(TARGET_R9M_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
 
 #include "DAC.h"
 #include "SX127xDriver.h"

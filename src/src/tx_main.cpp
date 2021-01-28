@@ -35,7 +35,7 @@ SX1280Driver Radio;
 #include "ESP32_WebUpdate.h"
 #endif
 
-#ifdef TARGET_R9M_TX
+#if defined(TARGET_R9M_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
 #include "DAC.h"
 #include "button.h"
 button button;
@@ -601,6 +601,9 @@ void setup()
   R9DAC.init();
 #endif
 
+  tone(GPIO_PIN_BUZZER, 1000, 10000);
+  delay(10000);
+
 #endif
 
 #ifdef PLATFORM_ESP32
@@ -714,7 +717,7 @@ void loop()
     #endif
   }
 
-#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1)
+#if defined(TARGET_R9M_TX) || defined(TARGET_R9M_LITE_TX) || defined(TARGET_R9M_LITE_PRO_TX) || defined(TARGET_RX_GHOST_ATTO_V1) || defined(TARGET_NAMIMNO_ALPHA_TX)
   crsf.STM32handleUARTin();
   #ifdef FEATURE_OPENTX_SYNC
   crsf.sendSyncPacketToTX();

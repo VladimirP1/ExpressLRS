@@ -171,6 +171,42 @@ https://github.com/jaxxzer
 //#define SYSCLK_FREQ_72MHz
 #endif
 
+#ifdef TARGET_NAMIMNO_ALPHA_TX
+/*
+Designed by NamimnoRC
+*/
+
+#define GPIO_PIN_RFswitch_CONTROL     PB3  //HIGH = RX, LOW = TX
+
+#define GPIO_PIN_NSS            PB12
+#define GPIO_PIN_DIO0           PA15
+#define GPIO_PIN_MOSI           PB15
+#define GPIO_PIN_MISO           PB14
+#define GPIO_PIN_SCK            PB13
+#define GPIO_PIN_RST            PC14
+#define GPIO_PIN_RX_ENABLE      GPIO_PIN_RFswitch_CONTROL
+#define GPIO_PIN_SDA            PB9
+#define GPIO_PIN_SCL            PB8
+#define GPIO_PIN_RCSIGNAL_RX    PA3 // RX2
+#define GPIO_PIN_RCSIGNAL_TX    PA2 // TX2
+#define GPIO_PIN_FAN_EN         PB1 
+
+#define BUFFER_OE               PA1
+#define GPIO_PIN_FAN_EN         PB1 // Fan mod https://github.com/AlessandroAU/ExpressLRS/wiki/R9M-Fan-Mod-Cover
+
+#define GPIO_PIN_DEBUG_RX    PA10
+#define GPIO_PIN_DEBUG_TX    PA9
+
+//#define GPIO_PIN_LED            PB0
+#define GPIO_PIN_LED_WS2812      PB0
+#define GPIO_PIN_LED_WS2812_FAST PB_0
+
+#define GPIO_PIN_BUSY           UNDEF_PIN // NOT USED ON THIS TARGET
+#define GPIO_PIN_DIO1           UNDEF_PIN  //Not Needed, HEARTBEAT pin
+
+
+#endif
+
 #ifdef TARGET_R9M_TX
 
 #define GPIO_PIN_RFamp_APC1           PA6  //APC2 is connected through a I2C dac and is handled elsewhere

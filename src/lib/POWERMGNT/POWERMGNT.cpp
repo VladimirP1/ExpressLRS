@@ -7,7 +7,7 @@ extern SX127xDriver Radio;
 extern SX1280Driver Radio;
 #endif
 
-#ifdef TARGET_R9M_TX
+#if defined(TARGET_R9M_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
 extern R9DAC R9DAC;
 #endif
 
@@ -38,8 +38,8 @@ PowerLevels_e POWERMGNT::currPower()
 
 void POWERMGNT::init()
 {
-#ifdef TARGET_R9M_TX
-    Serial.println("Init TARGET_R9M_TX DAC Driver");
+#if defined(TARGET_R9M_TX) || defined(TARGET_NAMIMNO_ALPHA_TX)
+    Serial.println("Init TARGET_R9M_TX or TARGET_NAMIMNO_ALPHA_TX DAC Driver");
 #endif
 #ifdef GPIO_PIN_FAN_EN
     pinMode(GPIO_PIN_FAN_EN, OUTPUT);
