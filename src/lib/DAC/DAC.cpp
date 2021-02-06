@@ -4,6 +4,10 @@
 #include "DAC.h"
 #include "SX127xDriver.h"
 
+#ifndef DAC_I2C_ADDRESS
+#define DAC_I2C_ADDRESS 0b0001100
+#endif /* DAC_I2C_ADDRESS */
+
 int R9DAC::LUT[8][4] = {
     // mw, dB, gain, APC2volts*1000, figures assume 2dBm input
     {10, 10, 8, 720},
@@ -30,7 +34,7 @@ void R9DAC::init()
 
     R9DAC::SDA = GPIO_PIN_SDA;
     R9DAC::SCL = GPIO_PIN_SCL;
-    R9DAC::ADDR = 0b0001100;
+    R9DAC::ADDR = DAC_I2C_ADDRESS;
 
     Wire.setSDA(GPIO_PIN_SDA); // set is needed or it wont work :/
     Wire.setSCL(SCL);

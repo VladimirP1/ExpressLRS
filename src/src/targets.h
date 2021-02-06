@@ -116,7 +116,7 @@ https://github.com/jaxxzer
 #elif TARGET_R9SLIMPLUS_RX               // R9SLIMPLUS USES DUAL UART CONFIGURATION FOR TX1/RX1
     #define GPIO_PIN_RCSIGNAL_RX    PB11 // RX1 PIN OF CONNECTOR 1 ON SLIMPLUS
     #define GPIO_PIN_RCSIGNAL_TX    PA9  // TX1 PIN OF CONNECTOR 1 ON SLIMPLUS
-#elif TARGET_R900MINI_RX                 
+#elif TARGET_R900MINI_RX
     #define GPIO_PIN_RCSIGNAL_RX    PA3 // convinient pin for direct chip solder
     #define GPIO_PIN_RCSIGNAL_TX    PA2 // convinient pin for direct chip solder
 #else //default R9MM_R9MINI or R9MX
@@ -176,35 +176,33 @@ https://github.com/jaxxzer
 Designed by NamimnoRC
 */
 
-#define GPIO_PIN_RFswitch_CONTROL     PB3  //HIGH = RX, LOW = TX
-
 #define GPIO_PIN_NSS            PB12
 #define GPIO_PIN_DIO0           PA15
 #define GPIO_PIN_MOSI           PB15
 #define GPIO_PIN_MISO           PB14
 #define GPIO_PIN_SCK            PB13
 #define GPIO_PIN_RST            PC14
-#define GPIO_PIN_RX_ENABLE      GPIO_PIN_RFswitch_CONTROL
+#define GPIO_PIN_RX_ENABLE      PB3  //HIGH = RX, LOW = TX
+/* DAC settings */
 #define GPIO_PIN_SDA            PB9
 #define GPIO_PIN_SCL            PB8
-#define GPIO_PIN_RCSIGNAL_RX    PA3 // RX2
-#define GPIO_PIN_RCSIGNAL_TX    PA2 // TX2
-#define GPIO_PIN_FAN_EN         PB1 
-
+#define DAC_I2C_ADDRESS         0b0001101
+/* S.Port input signal */
+#define GPIO_PIN_RCSIGNAL_RX    PB11 /* USART3 */
+#define GPIO_PIN_RCSIGNAL_TX    PB10 /* USART3 */
 #define BUFFER_OE               PA1
-#define GPIO_PIN_FAN_EN         PB1 // Fan mod https://github.com/AlessandroAU/ExpressLRS/wiki/R9M-Fan-Mod-Cover
-
-#define GPIO_PIN_DEBUG_RX    PA10
-#define GPIO_PIN_DEBUG_TX    PA9
-
-//#define GPIO_PIN_LED            PB0
+#define BUFFER_OE_INVERTED      1
+/* FAN: https://github.com/AlessandroAU/ExpressLRS/wiki/R9M-Fan-Mod-Cover */
+#define GPIO_PIN_FAN_EN         PB1
+/* Backpack logger connection */
+#define GPIO_PIN_DEBUG_RX       PA10
+#define GPIO_PIN_DEBUG_TX       PA9
+/* WS2812 led */
 #define GPIO_PIN_LED_WS2812      PB0
 #define GPIO_PIN_LED_WS2812_FAST PB_0
-
-#define GPIO_PIN_BUSY           UNDEF_PIN // NOT USED ON THIS TARGET
-#define GPIO_PIN_DIO1           UNDEF_PIN  //Not Needed, HEARTBEAT pin
-
-
+/* SX128x specific, not used */
+#define GPIO_PIN_BUSY           UNDEF_PIN
+#define GPIO_PIN_DIO1           UNDEF_PIN
 #endif
 
 #ifdef TARGET_R9M_TX
@@ -402,3 +400,7 @@ Designed by NamimnoRC
 #define GPIO_PIN_LED GPIO_PIN_LED_RED
 #endif /* GPIO_PIN_LED_RED */
 #endif /* GPIO_PIN_LED */
+
+#ifndef BUFFER_OE_INVERTED
+#define BUFFER_OE_INVERTED 0
+#endif

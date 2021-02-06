@@ -838,7 +838,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
                 {
                     if (SerialOutFIFO.size() >= (peekVal + 1))
                     {
-                        digitalWrite(BUFFER_OE, HIGH);
+                        digitalWrite(BUFFER_OE, HIGH ^ BUFFER_OE_INVERTED);
 
                         uint8_t OutPktLen = SerialOutFIFO.pop();
                         uint8_t OutData[OutPktLen];
@@ -846,7 +846,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
                         SerialOutFIFO.popBytes(OutData, OutPktLen);
                         CRSF::Port.write(OutData, OutPktLen); // write the packet out
                         CRSF::Port.flush();
-                        digitalWrite(BUFFER_OE, LOW);
+                        digitalWrite(BUFFER_OE, LOW ^ BUFFER_OE_INVERTED);
                         while (CRSF::Port.available())
                         {
                             CRSF::Port.read(); // measure sure there is no garbage on the UART at the start
