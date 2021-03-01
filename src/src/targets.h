@@ -202,6 +202,7 @@ https://github.com/jaxxzer
 
 
 #define BUFFER_OE               PA5  //CONFIRMED
+#define BUFFER_OE_ACTIVE HIGH
 #define GPIO_PIN_DIO1           PA1  //Not Needed, HEARTBEAT pin
 #endif
 
@@ -229,7 +230,7 @@ https://github.com/jaxxzer
 #define GPIO_PIN_DEBUG_TX    PA2 // confirmed
 
 #define BUFFER_OE               PA5  //CONFIRMED
-
+#define BUFFER_OE_ACTIVE HIGH
 #endif
 
 #ifdef TARGET_R9M_LITE_PRO_TX
@@ -258,6 +259,7 @@ https://github.com/jaxxzer
 #define GPIO_PIN_DEBUG_TX      	PA2  // inverted UART JR
 
 #define BUFFER_OE               PB2  //CONFIRMED
+#define BUFFER_OE_ACTIVE LOW
 #define GPIO_PIN_VRF1			        PA7  // 26SU Switch RF1
 #define GPIO_PIN_VRF2			        PB1  // 26SU Switch RF2
 #define GPIO_PIN_SWR			         PA0  // SWR ADC1_IN1

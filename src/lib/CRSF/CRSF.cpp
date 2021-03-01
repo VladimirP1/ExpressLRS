@@ -737,6 +737,8 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
                 Serial.println("Start STM32 R9M TX CRSF UART");
 
                 pinMode(BUFFER_OE, OUTPUT);
+                digitalWrite(BUFFER_OE, !BUFFER_OE_ACTIVE);
+
 
                 CRSF::Port.setTx(GPIO_PIN_RCSIGNAL_TX);
                 CRSF::Port.setRx(GPIO_PIN_RCSIGNAL_RX);
@@ -838,7 +840,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
                 {
                     if (SerialOutFIFO.size() >= (peekVal + 1))
                     {
-                        digitalWrite(BUFFER_OE, HIGH);
+                        digitalWrite(BUFFER_OE, BUFFER_OE_ACTIVE);
 
                         uint8_t OutPktLen = SerialOutFIFO.pop();
                         uint8_t OutData[OutPktLen];
@@ -846,7 +848,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
                         SerialOutFIFO.popBytes(OutData, OutPktLen);
                         CRSF::Port.write(OutData, OutPktLen); // write the packet out
                         CRSF::Port.flush();
-                        digitalWrite(BUFFER_OE, LOW);
+                        digitalWrite(BUFFER_OE, !BUFFER_OE_ACTIVE);
                         while (CRSF::Port.available())
                         {
                             CRSF::Port.read(); // measure sure there is no garbage on the UART at the start
