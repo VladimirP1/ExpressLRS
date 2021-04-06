@@ -1,0 +1,24 @@
+--- src/src/targets.h
++++ src/src/targets.h
+@@ -223,9 +223,8 @@ https://github.com/jaxxzer
+ 
+ #define BUFFER_OE               PA5  //CONFIRMED
+ #define BUFFER_OE_ACTIVE HIGH
+-#endif
+ 
+-#ifdef TARGET_R9M_LITE_PRO_TX
++#elif defined(TARGET_R9M_LITE_PRO_TX)
+ #define GPIO_PIN_RFamp_APC1           PA4  //2.7V
+ #define GPIO_PIN_RFamp_APC2           PA5  //100mW@590mV, 200mW@870mV, 500mW@1.093V, 1W@1.493V
+ #define GPIO_PIN_RFswitch_CONTROL     PA6  // confirmed  //HIGH = RX, LOW = TX
+@@ -256,9 +255,7 @@ https://github.com/jaxxzer
+ #define GPIO_PIN_VRF2                          PB1  // 26SU Switch RF2
+ #define GPIO_PIN_SWR                            PA0  // SWR ADC1_IN1
+ 
+-#endif
+-
+-#ifdef TARGET_RX_ESP8266_SX1280_V1
++#elif defined(TARGET_RX_ESP8266_SX1280_V1)
+ #define GPIO_PIN_NSS 15
+ #define GPIO_PIN_BUSY 5
+ #define GPIO_PIN_DIO0 -1 // does not exist on sx1280
