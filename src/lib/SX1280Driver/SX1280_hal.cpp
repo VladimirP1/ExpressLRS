@@ -110,7 +110,7 @@ void SX1280Hal::init()
     SPI.setBitOrder(MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
     SPI.begin();
-    SPI.setClockDivider(SPI_CLOCK_DIV4); // 72 / 8 = 9 MHz
+    SPI.setClockDivider(SPI_CLOCK_DIV32); // 72 / 8 = 9 MHz
 #endif
 
     //attachInterrupt(digitalPinToInterrupt(GPIO_PIN_BUSY), this->busyISR, CHANGE); //not used atm
