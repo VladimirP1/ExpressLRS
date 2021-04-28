@@ -87,6 +87,28 @@
 #define GPIO_PIN_BUTTON 0
 #define timerOffset -1
 
+#elif defined(TARGET_R900MINI_TX)
+
+#define GPIO_PIN_NSS            PA15 //confirmed on SLIMPLUS, R900MINI
+#define GPIO_PIN_BUSY           -1   // NOT USED ON THIS TARGET
+#define GPIO_PIN_DIO0           PC13 //confirmed on SLIMPLUS, R900MINI
+#define GPIO_PIN_DIO1           PA1  // non-existent
+#define GPIO_PIN_MOSI           PB15 //confirmed on SLIMPLUS, R900MINI
+#define GPIO_PIN_MISO           PB14 //confirmed on SLIMPLUS, R900MINI
+#define GPIO_PIN_SCK            PB13 //confirmed on SLIMPLUS, R900MINI
+#define GPIO_PIN_RST            PC14 //confirmed on SLIMPLUS, R900MINI
+#define GPIO_PIN_SDA            PB7
+#define GPIO_PIN_SCL            PB6
+#define GPIO_PIN_RCSIGNAL_RX    PA3 // convinient pin for direct chip solder
+#define GPIO_PIN_RCSIGNAL_TX    PA2 // convinient pin for direct chip solder
+#define GPIO_PIN_LED            PA11 // non-existent
+#define GPIO_PIN_LED_RED        PA11 // non-existent
+#define GPIO_PIN_LED_GREEN      PA12 // non-existent
+#define GPIO_PIN_BUTTON         PA4  // non-existent
+#define BUFFER_OE               PC15 // non-existent
+#define GPIO_PIN_RX_ENABLE      PB0
+#define GPIO_PIN_TX_ENABLE      PA2
+
 #elif defined(TARGET_R9M_RX)
 /*
 Credit to Jacob Walser (jaxxzer) for the pinout!!!
